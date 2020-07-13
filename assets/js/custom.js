@@ -122,16 +122,12 @@
 			return false;
 		});
 
-
-		// Edit Student Data 
-		$(document).on('click','a#edit_student', function(e){
-			e.preventDefault();
-
-			let edit_id = $(this).attr('chatro_id');
+		// Single Student Data Seach
+		function singleStudent(student_id){
 
 			$.ajax({
 				url : 'inc/ajax/edit_student.php',
-				data : { id : edit_id },
+				data : { id : student_id },
 				method : "POST", 
 				success : function(data){
 					let edit_data = JSON.parse(data);
@@ -147,6 +143,18 @@
 				}
 
 			});
+
+
+		}
+
+
+		// Edit Student Data 
+		$(document).on('click','a#edit_student', function(e){
+			e.preventDefault();
+
+			let edit_id = $(this).attr('chatro_id');
+
+			singleStudent(edit_id);
 
 
 			$('#student_update_modal').modal('show');
@@ -171,9 +179,12 @@
 				method	 : "POST",
 				success : function(data){
 
-					$('#student_update_modal').modal('hide');
-					$('.mess-all').html('<p class="alert alert-success">Student data Updated successfull  ! <button class="close" data-dismiss="alert">&times;</button></p>');
+					// $('#student_update_modal').modal('hide');
+					$('.mess').html('<p class="alert alert-success">Student data Updated successfull  ! <button class="close" data-dismiss="alert">&times;</button></p>');
 					allStudentData();
+					singleStudent(data);
+
+					
 
 				}
 			});

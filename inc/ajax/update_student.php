@@ -8,13 +8,13 @@
 	require_once "../../app/function.php";
 
 
-	$id = $_POST['student_id']; 
+	echo $id = $_POST['student_id']; 
 	$name = $_POST['name']; 
 	$email = $_POST['email']; 
 	$cell = $_POST['cell']; 
 
 
-	if ( isset($_FILES['new_photo']['name']) ) {
+	if ( !empty($_FILES['new_photo']['name']) ) {
 		
 		$data = fileUp($_FILES['new_photo'], '../../media/students/' );
 		$photo_name = $data['file_name'];
